@@ -17,7 +17,9 @@ In this app, one can do daily basic exercise and burn some calories which helps 
 
 
 <b>SHOTS FROM RANDOM MODE</b>
+<br>
 <b>dashboard1</b>
+<br>
 <img src="/screenshots/dashboard1.jpeg" width="50%" height="50%">
 <br>
 <img src="/screenshots/dasshboard2.jpeg" width="50%" height="50%">
