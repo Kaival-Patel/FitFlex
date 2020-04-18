@@ -1,10 +1,12 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:gradient_app_bar/gradient_app_bar.dart';
-import 'package:myworkout_app/Screens/Exercise.dart';
+import 'package:myworkout_app/Screens/RandomScreen.dart';
 import 'package:myworkout_app/datamodel/exercisemodes.dart';
 import 'package:myworkout_app/datamodel/randomexlist.dart';
 import 'package:numberpicker/numberpicker.dart';
+import 'SelectiveScreen.dart';
+import 'DailyScreen.dart';
 
 class Dashbaord extends StatefulWidget {
   
@@ -360,7 +362,9 @@ class _DashbaordState extends State<Dashbaord> {
                 onPressed: (){
                 Navigator.pop(context);
                 Navigator.push(context, MaterialPageRoute(
-                                  builder: (context)=>Exercise(exercisemode: modename,exestarted: false,setcount: _setcount,generatedList:generatedList,)
+                                  builder:modename=="Random"?(context)=>RandomScreen(exercisemode: modename,exestarted: false,setcount: _setcount,generatedList:generatedList,)
+                                  :modename=="Selective"?(context)=>SelectiveScreen()
+                                  :(context)=>DailyScreen(),
                                 ));
                 }
                 

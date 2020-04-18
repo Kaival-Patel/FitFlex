@@ -1,5 +1,5 @@
 import 'package:audioplayers/audio_cache.dart';
-import '../Exercise.dart';
+import '../RandomScreen.dart';
 import 'package:audioplayers/audioplayers.dart';
 import 'package:flutter/material.dart';
 import 'package:wakelock/wakelock.dart';

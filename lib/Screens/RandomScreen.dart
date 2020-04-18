@@ -13,15 +13,15 @@ import 'package:wakelock/wakelock.dart';
 import 'package:after_layout/after_layout.dart';
 
 
-class Exercise extends StatefulWidget {
+class RandomScreen extends StatefulWidget {
   final String exercisemode;
   final int setcount;
   bool exestarted;
   List<randomexelist> generatedList;
   
-  Exercise({this.exercisemode,this.setcount,this.exestarted,this.generatedList});
+  RandomScreen({this.exercisemode,this.setcount,this.exestarted,this.generatedList});
   @override
-  _ExerciseState createState() => _ExerciseState(exercisemode,setcount,exestarted,generatedList);
+  _RandomScreenState createState() => _RandomScreenState(exercisemode,setcount,exestarted,generatedList);
 
 
   void afterFirstLayout(BuildContext context) {
@@ -46,7 +46,7 @@ class Exercise extends StatefulWidget {
 
 
 
-class _ExerciseState extends State<Exercise> with TickerProviderStateMixin {
+class _RandomScreenState extends State<RandomScreen> with TickerProviderStateMixin {
   // final GlobalKey<AnimatedTimerState> animatedStateKey1 = GlobalKey<AnimatedTimerState>();
   // final GlobalKey<AnimatedTimerState> animatedStateKey2 = GlobalKey<AnimatedTimerState>();
   // final GlobalKey<AnimatedTimerState> animatedStateKey3 = GlobalKey<AnimatedTimerState>();
@@ -63,7 +63,7 @@ class _ExerciseState extends State<Exercise> with TickerProviderStateMixin {
 
   final TextStyle _lightstyle=TextStyle(fontFamily:"Oxygen-light",fontWeight:FontWeight.normal,fontSize: 18.0);
   final TextStyle _boldstyle=TextStyle(fontFamily:"Oxygen-light",fontWeight:FontWeight.bold,fontSize: 18.0);
-  _ExerciseState(this.exercisemode,this.setcount,this.exestarted,this.generatedList);
+  _RandomScreenState(this.exercisemode,this.setcount,this.exestarted,this.generatedList);
   
   
   

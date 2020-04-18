@@ -3,8 +3,9 @@ import 'package:flutter/material.dart';
 import '../datamodel/randomexlist.dart';
 import 'package:audioplayers/audioplayers.dart';
 import 'package:audioplayers/audio_cache.dart';
-import '../Screens/Exercise.dart';
+import '../Screens/RandomScreen.dart';
 import 'package:wakelock/wakelock.dart';
+import '../Screens/SelectiveScreen.dart';
 class PopDialog extends StatefulWidget {
   Timer timer;
   int popMaxValue;
@@ -65,7 +66,8 @@ class _PopDialogState extends State<PopDialog> {
           Navigator.pop(context);
           Wakelock.enable();
           Navigator.push(context, MaterialPageRoute(
-            builder: (context)=>Exercise(exercisemode: exercisemode,exestarted: true,setcount: setcount,generatedList: randomexelist,),
+            builder: (context)=>RandomScreen(exercisemode: exercisemode,exestarted: true,setcount: setcount,generatedList: randomexelist,),
+          
           ));
          
           // animatedStateKey.currentState.animationController.reverse(
