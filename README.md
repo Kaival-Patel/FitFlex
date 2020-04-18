@@ -45,7 +45,9 @@ At Every exercise, different motivational songs will be played, which helps the 
    
   </tr>
 </table>
+
 <br>
+
 <table>
   <tr>
     <td><b>CountDown</b></td>
@@ -54,6 +56,20 @@ At Every exercise, different motivational songs will be played, which helps the 
   <tr>
     <td><img src="/screenshots/countdown.jpeg" ></td>
     <td><img src="/screenshots/timerstart.jpeg"></td>
+   
+  </tr>
+</table>
+
+<br>
+
+<table>
+  <tr>
+    <td><b>Break Alert</b></td>
+     <td><b>Choose Set</b></td>
+  </tr>
+  <tr>
+    <td><img src="/screenshots/breakpopup.jpeg" ></td>
+    <td><img src="/screenshots/sets.jpeg"></td>
    
   </tr>
 </table>
