@@ -17,7 +17,7 @@ In this app, one can do daily basic exercise and burn some calories which helps 
 
 
 SHOTS FROM RANDOM MODE
-![ScreenShot](/flutter_01.png)
+![ScreenShot](/flutter_01.png){:height="100px" width="50px"}
 
 
 ### DAILY MODE
