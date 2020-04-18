@@ -24,7 +24,6 @@ In this app, one can do daily basic exercise and burn some calories which helps 
   <tr>
     <td>Dashboard 1</td>
      <td>Dashboard 2</td>
-     <td>Present day in purple and selected day in pink</td>
   </tr>
   <tr>
     <td><img src="/screenshots/dashboard1.jpeg" width="50%" height="50%"></td>
