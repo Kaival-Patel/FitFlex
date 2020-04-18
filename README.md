@@ -16,7 +16,7 @@ In this app, one can do daily basic exercise and burn some calories which helps 
 3.At the end of all the exercise,user wil be prompted with how many calories they burnt (approx).
 
 
-SHOTS FROM RANDOM MODE
+<b>SHOTS FROM RANDOM MODE</b>
 
 <img src="/flutter_01.png" width="50%" height="50%">
 
