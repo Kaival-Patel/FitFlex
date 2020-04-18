@@ -26,8 +26,8 @@ In this app, one can do daily basic exercise and burn some calories which helps 
      <td>Dashboard 2</td>
   </tr>
   <tr>
-    <td><img src="/screenshots/dashboard1.jpeg" width="50%" height="50%"></td>
-    <td><img src="/screenshots/dasshboard2.jpeg" width="50%" height="50%"></td>
+    <td><img src="/screenshots/dashboard1.jpeg" ></td>
+    <td><img src="/screenshots/dasshboard2.jpeg"></td>
    
   </tr>
  </table>
