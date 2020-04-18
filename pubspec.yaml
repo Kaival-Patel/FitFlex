@@ -20,6 +20,9 @@ dependencies:
   gradient_app_bar: ^0.1.3
   numberpicker: ^1.2.0
   audioplayers: ^0.15.1
+  delayed_display: ^1.0.2
+  after_layout: ^1.0.7+2
+  wakelock: ^0.1.4+1
   flutter:
     sdk: flutter
 
@@ -47,6 +50,9 @@ flutter:
   # To add assets to your application, add an assets section, like this:
   assets:
    - assets/gif/gym.gif
+   - assets/gif/finished_workout.gif
+   - assets/gif/break1.gif
+   - assets/gif/break2.gif
    - assets/gif/gym1.gif
    - assets/img/lco_logo.png
    - assets/img/3.png
@@ -65,6 +71,11 @@ flutter:
    - assets/img/14.png
    - assets/gif/countdown.gif
    - assets/audio/final_countdown.mp3
+   - assets/audio/ashes.mp3
+   - assets/audio/rock1.mp3
+   - assets/audio/rock2.mp3
+   - assets/audio/rock3.mp3
+   - assets/audio/joined audio.mp3
    
 
 

@@ -3,7 +3,9 @@ import 'package:flutter/services.dart';
 import 'package:gradient_app_bar/gradient_app_bar.dart';
 import 'package:myworkout_app/Screens/Exercise.dart';
 import 'package:myworkout_app/datamodel/exercisemodes.dart';
+import 'package:myworkout_app/datamodel/randomexlist.dart';
 import 'package:numberpicker/numberpicker.dart';
+
 class Dashbaord extends StatefulWidget {
   
 
@@ -15,6 +17,7 @@ class _DashbaordState extends State<Dashbaord> {
   final TextStyle _lightstyle=TextStyle(fontFamily:"Oxygen-light",fontWeight:FontWeight.normal,fontSize: 18.0);
   final TextStyle _boldstyle=TextStyle(fontFamily:"Oxygen-light",fontWeight:FontWeight.bold,fontSize: 18.0);
   NumberPicker intPicker;
+  List<randomexelist> generatedList;
   TextEditingController setController;
   Decoration _decoration = new BoxDecoration(
     border: new Border(
@@ -355,8 +358,9 @@ class _DashbaordState extends State<Dashbaord> {
                 color: Colors.indigo[900],
                 splashColor:Colors.indigo[100] ,
                 onPressed: (){
+                Navigator.pop(context);
                 Navigator.push(context, MaterialPageRoute(
-                                  builder: (context)=>Exercise(modename,_setcount,false)
+                                  builder: (context)=>Exercise(exercisemode: modename,exestarted: false,setcount: _setcount,generatedList:generatedList,)
                                 ));
                 }
                 

@@ -1,76 +1,107 @@
+import 'dart:math';
+import 'package:myworkout_app/Widgets/PopDialog.dart';
 import 'package:audioplayers/audio_cache.dart';
 import 'package:audioplayers/audioplayers.dart';
+import 'package:delayed_display/delayed_display.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter/services.dart';
 import 'dart:ui';
 import 'package:gradient_app_bar/gradient_app_bar.dart';
 import 'package:myworkout_app/Screens/CountDown/AnimatedTimer.dart';
 import 'package:myworkout_app/datamodel/randomexlist.dart';
 import 'dart:async';
-import 'dart:math' as math;
+import 'package:wakelock/wakelock.dart';
+import 'package:after_layout/after_layout.dart';
+
+
 class Exercise extends StatefulWidget {
   final String exercisemode;
-  final bool isexeStarted;
   final int setcount;
-  Exercise(this.exercisemode,this.setcount,this.isexeStarted);
+  bool exestarted;
+  List<randomexelist> generatedList;
+  
+  Exercise({this.exercisemode,this.setcount,this.exestarted,this.generatedList});
   @override
-  _ExerciseState createState() => _ExerciseState(exercisemode,setcount,isexeStarted);
+  _ExerciseState createState() => _ExerciseState(exercisemode,setcount,exestarted,generatedList);
+
+
+  void afterFirstLayout(BuildContext context) {
+    // Calling the same function "after layout" to resolve the issue.
+    showHelloWorld(context);
+  }
+  void showHelloWorld(BuildContext context) {
+    showDialog(
+      context: context,
+      builder: (context) => new AlertDialog(
+            content: new Text('Hello World'),
+            actions: <Widget>[
+              new FlatButton(
+                child: new Text('DISMISS'),
+                onPressed: () => Navigator.of(context).pop(),
+              )
+            ],
+          ),
+    );
+  }
 }
 
 
 
 class _ExerciseState extends State<Exercise> with TickerProviderStateMixin {
-  final GlobalKey<AnimatedTimerState> animatedStateKey1 = GlobalKey<AnimatedTimerState>();
-  final GlobalKey<AnimatedTimerState> animatedStateKey2 = GlobalKey<AnimatedTimerState>();
-  final GlobalKey<AnimatedTimerState> animatedStateKey3 = GlobalKey<AnimatedTimerState>();
-  final GlobalKey<AnimatedTimerState> animatedStateKey4 = GlobalKey<AnimatedTimerState>();
+  // final GlobalKey<AnimatedTimerState> animatedStateKey1 = GlobalKey<AnimatedTimerState>();
+  // final GlobalKey<AnimatedTimerState> animatedStateKey2 = GlobalKey<AnimatedTimerState>();
+  // final GlobalKey<AnimatedTimerState> animatedStateKey3 = GlobalKey<AnimatedTimerState>();
+  // final GlobalKey<AnimatedTimerState> animatedStateKey4 = GlobalKey<AnimatedTimerState>();
   String exercisemode;
+  //AnimationController controller1,controller2,controller3,controller4;
   int setcount;
   Timer _timer;
+  final int BREAK_TIME=40;
   int _popMaxValue=3;
-  bool isExeStarted;
+  int breakMaxValue=40;
+  bool exestarted;
+  List<randomexelist> generatedList;
+
   final TextStyle _lightstyle=TextStyle(fontFamily:"Oxygen-light",fontWeight:FontWeight.normal,fontSize: 18.0);
   final TextStyle _boldstyle=TextStyle(fontFamily:"Oxygen-light",fontWeight:FontWeight.bold,fontSize: 18.0);
-  _ExerciseState(this.exercisemode,this.setcount,this.isExeStarted);
+  _ExerciseState(this.exercisemode,this.setcount,this.exestarted,this.generatedList);
   
-  //define Controller
-  // AnimationController exercisecontroller4,exercisecontroller,exercisecontroller2,exercisecontroller3;
-   
-
+  
+  
 
   @override
   void initState(){
     super.initState();
-    // isExeStarted?animatedStateKey1.currentState.STATUS_CODE=1:
-    // animatedStateKey1.currentState.STATUS_CODE=0;
     
-          // : animatedStateKey.currentState.animationController!=null?
-          // animatedStateKey.currentState.animationController.stop():null;
-          //animatedStateKey.currentState.animationController.stop();  
-    //initialise controller
-    // exercisecontroller2=AnimationController(
-    //   vsync: this,
-    //   duration: Duration(seconds: 60)
-    // );
-    // exercisecontroller=AnimationController(
-    //   vsync: this,
-    //   duration: Duration(seconds: 60)
-    // );
-    // isExeStarted?exercisecontroller.reverse(
-    // from: exercisecontroller.value == 0.0
-    //       ? 1.0
-    //       : exercisecontroller.value)
-    //       :exercisecontroller.stop();
-    // exercisecontroller.isCompleted?exercisecontroller2.reverse(
-    // from: exercisecontroller2.value == 0.0
-    //       ? 1.0
-    //       : exercisecontroller2.value)
-    //       :exercisecontroller2.stop();      
+    var rng=new Random();
+    if(!exestarted){
+    generatedList=List<randomexelist>();
+        while(generatedList.length<5){
+        int randomnum = rng.nextInt(6);
+        print("RANDOM NUMBER:${randomnum}");
+        if(!generatedList.contains(randomlist[randomnum])){
+            //add exercise 
+            generatedList.add(randomlist[randomnum]);
+        }
+        
+        
+        } 
+    }
+    else{
+          generatedList=widget.generatedList;
+
+    }
+
+     
+    for(int i=0;i<generatedList.length;i++){
+      print("LIST:${generatedList[i].exercisename}");
+    }
+    print("LIST GENERATED with length:${generatedList.length}");
           
   }
 
   @override
   Widget build(BuildContext context) {
+    
     return WillPopScope(
       onWillPop:_onAppExit,
       child: Scaffold(
@@ -126,12 +157,20 @@ class _ExerciseState extends State<Exercise> with TickerProviderStateMixin {
                           children: <Widget>[
                             IconButton(
                               onPressed:(){
+                                if(!exestarted){
                                 return showDialog(context: context,
                                 barrierDismissible: false,
-                                child: PopDialog(timer:_timer,popMaxValue: _popMaxValue,exercisemode: exercisemode,setcount: setcount,)
-                              );
+                                //to start in 3 2 1 go 
+                                child: PopDialog(timer:_timer,popMaxValue: _popMaxValue,exercisemode: exercisemode,setcount: setcount,generatedlist: generatedList,)
+                                );
+                              }
+                              else{
+
+                              }
                               },
-                              icon: Icon(Icons.play_circle_outline,color: Colors.teal,size: 30,),
+                              icon:!exestarted?Icon(Icons.play_circle_outline,color: Colors.teal,size: 30,)
+                              :Icon(Icons.accessibility_new,color: Colors.teal,size:30)
+                              ,
                             )
                           ],
                         ),
@@ -156,12 +195,12 @@ class _ExerciseState extends State<Exercise> with TickerProviderStateMixin {
                           ],
                         ),
                       ),
-                          Expanded(
+                        Expanded(
                           child: ListView.builder(
                           shrinkWrap: true,
                           scrollDirection: Axis.vertical,
                           padding: EdgeInsets.all(20),
-                          itemCount: randomlist.length,
+                          itemCount: generatedList.length,
                           itemBuilder:(context,i)=>
                           Container(
                             decoration: BoxDecoration(
@@ -176,7 +215,7 @@ class _ExerciseState extends State<Exercise> with TickerProviderStateMixin {
                                 
                               },
                               child: Padding(
-                                padding: const EdgeInsets.all(10.0),
+                                padding: const EdgeInsets.only(bottom:10,left:3,right:3),
                                 child: Container(    
                                   decoration: BoxDecoration(
                                     gradient:LinearGradient(
@@ -186,7 +225,8 @@ class _ExerciseState extends State<Exercise> with TickerProviderStateMixin {
                                       colors:i==0?[Color(0xff85DBAA),Color(0xff20B8A1)] : 
                                       i==1?[Color(0xffFAC871),Color(0xffFF9229)]:
                                       i==2?[Color(0xff80D4FB),Color(0xff12A4E8)]:
-                                      [Color(0xffFBB1A8),Color(0xffF26851)]
+                                      i==3?[Color(0xffFBB1A8),Color(0xffF26851)]:
+                                      [Color(0xffC6A8FB),Color(0xff8A4CF8)]
                                     ),
                                     borderRadius: BorderRadius.only(topRight: Radius.circular(30.0),topLeft: Radius.circular(10.0),
                                     bottomLeft: Radius.circular(10.0),bottomRight: Radius.circular(10.0),
@@ -200,42 +240,83 @@ class _ExerciseState extends State<Exercise> with TickerProviderStateMixin {
                                             children: <Widget>[
                                              Container(
                                                height: 150,
-                                               child:
-                                               isExeStarted?i==0?AnimatedTimer(
-                                                 key:animatedStateKey1,
-                                                 statuscode:1,
-                                                 duration:60,color:Color(0xff135438)
-                                               ):i==1?AnimatedTimer(
-                                                 key:animatedStateKey2,
-                                                 statuscode:1,
-                                                 duration:60,color:Color(0xff78400A)
-                                               ):i==2?AnimatedTimer(
-                                                 key:animatedStateKey3,
-                                                 statuscode:1,
-                                                 duration:60,color:Color(0xff08425D)
-                                               ):AnimatedTimer(
-                                                 key:animatedStateKey4,
-                                                 statuscode:1,
-                                                 duration:60,color:Color(0xff9F3624)
+                                               child:exestarted?DelayedDisplay(
+                                                 child: i==0?AnimatedTimer(color:
+                                                 i==0?
+                                                 Color(0xff135438)
+                                                 :i==1?Color(0xff78400A) 
+                                                 :i==2?Color(0xff08425D)
+                                                 :i==3?Color(0xff9F3624)
+                                                 :Color(0xff4F2991)                                                
+                                                 ,duration: generatedList[i].time,statuscode: 0,setcount: setcount,)
+                                                        :i==1?new AnimatedTimer(color:i==0?
+                                                          Color(0xff135438)
+                                                          :i==1?Color(0xff78400A) 
+                                                          :i==2?Color(0xff08425D)
+                                                          :i==3?Color(0xff9F3624)
+                                                          :Color(0xff4F2991)
+                                                           ,duration:generatedList[i].time,statuscode: 1,setcount: setcount)
+                                                        :i==2?AnimatedTimer(
+                                                          color:i==0?
+                                                          Color(0xff135438)
+                                                          :i==1?Color(0xff78400A) 
+                                                          :i==2?Color(0xff08425D)
+                                                          :i==3?Color(0xff9F3624)
+                                                          :Color(0xff4F2991)
+                                                           ,duration:generatedList[i].time,statuscode: 2,setcount: setcount)
+                                                        :i==3?AnimatedTimer(color:i==0?
+                                                        Color(0xff135438)
+                                                        :i==1?Color(0xff78400A) 
+                                                        :i==2?Color(0xff08425D)
+                                                        :i==3?Color(0xff9F3624)
+                                                        :Color(0xff4F2991)
+                                                         ,duration:generatedList[i].time,statuscode: 3,setcount: setcount)
+                                                        :AnimatedTimer(color:i==0?
+                                                        Color(0xff135438)
+                                                        :i==1?Color(0xff78400A) 
+                                                        :i==2?Color(0xff08425D)
+                                                        :i==3?Color(0xff9F3624)
+                                                        :Color(0xff4F2991)
+                                                         ,duration:generatedList[i].time,statuscode: 4,setcount: setcount) 
+                                                         ,
+                                                 delay: i==0?Duration(seconds: 0):
+                                                        i==1?Duration(seconds: generatedList[i].time+BREAK_TIME):
+                                                        i==2?Duration(seconds: (generatedList[i].time+BREAK_TIME)*2):
+                                                        i==3?Duration(seconds: (generatedList[i].time+BREAK_TIME)*3):
+                                                        Duration(seconds: (generatedList[i].time+BREAK_TIME)*4)
+                                               ):
+                                               DelayedDisplay(
+                                                        child: i==0?AnimatedTimer(color:i==0?
+                                                        Color(0xff135438)
+                                                        :i==1?Color(0xff78400A) 
+                                                        :i==2?Color(0xff08425D)
+                                                        :i==3?Color(0xff9F3624)
+                                                        :Color(0xff4F2991) ,duration:generatedList[i].time,statuscode: 5,setcount: setcount,)
+                                                        :i==1?new AnimatedTimer(color:i==0?
+                                                        Color(0xff135438)
+                                                        :i==1?Color(0xff78400A) 
+                                                        :i==2?Color(0xff08425D)
+                                                        :i==3?Color(0xff9F3624)
+                                                        :Color(0xff4F2991) ,duration:generatedList[i].time,statuscode: 5,setcount: setcount)
+                                                        :i==2?AnimatedTimer(color:i==0?
+                                                        Color(0xff135438)
+                                                        :i==1?Color(0xff78400A) 
+                                                        :i==2?Color(0xff08425D)
+                                                        :i==3?Color(0xff9F3624)
+                                                        :Color(0xff4F2991) ,duration:generatedList[i].time,statuscode: 5,setcount: setcount)
+                                                        :AnimatedTimer(color:i==0?
+                                                        Color(0xff135438)
+                                                        :i==1?Color(0xff78400A) 
+                                                        :i==2?Color(0xff08425D)
+                                                        :i==3?Color(0xff9F3624)
+                                                        :Color(0xff4F2991) ,duration:generatedList[i].time,statuscode: 5,setcount: setcount),
+                                                 delay: i==0?Duration(seconds: 0):
+                                                        i==1?Duration(seconds: 0):
+                                                        i==2?Duration(seconds: 0):
+                                                        Duration(seconds: 0)
                                                )
-                                               :
-                                               i==0?AnimatedTimer(
-                                                 key:animatedStateKey1,
-                                                 statuscode:0,
-                                                 duration:60,color:Color(0xff135438)
-                                               ):i==1?AnimatedTimer(
-                                                 key:animatedStateKey2,
-                                                 statuscode:0,
-                                                 duration:60,color:Color(0xff78400A)
-                                               ):i==2?AnimatedTimer(
-                                                 key:animatedStateKey3,
-                                                 statuscode:0,
-                                                 duration:60,color:Color(0xff08425D)
-                                               ):AnimatedTimer(
-                                                 key:animatedStateKey4,
-                                                 statuscode:0,
-                                                 duration:60,color:Color(0xff9F3624)
-                                               )
+
+                                                     
                                              ),
                                       
                                                 // Padding(
@@ -308,6 +389,41 @@ class _ExerciseState extends State<Exercise> with TickerProviderStateMixin {
                                                 
                                                 ],
                                               ),
+                                              Padding(
+                                                padding: EdgeInsets.fromLTRB(10, 10, 10, 10),
+                                                child: Column(
+                                                  children: <Widget>[
+                                                    Center(child: Text(generatedList[i].exercisename,style:TextStyle(fontFamily:"Oxygen-light",fontWeight:FontWeight.bold,color:Colors.white,fontSize: 22.0),)),
+                                                    Container(
+                                                      width:80,
+                                                      child:Center(child: Text(generatedList[i].exercisebenefits,style:TextStyle(fontFamily:"Oxygen-light",fontWeight:FontWeight.normal,color:Colors.white,fontSize: 12.0),))
+
+                                                    )
+                                                  ],
+                                                ),
+                                              ),
+                                              Padding(
+                                                padding: EdgeInsets.fromLTRB(10, 10, 10, 10),
+                                                child: Column(
+                                                  children: <Widget>[
+                                                    Center(
+                                                      child: Image(image: AssetImage(
+                                                        generatedList[i].exercisename=="Stretches"?"assets/img/4.png"
+                                                        :generatedList[i].exercisename=="Pushups"?"assets/img/1.png"
+                                                        :generatedList[i].exercisename=="Bench Press"?"assets/img/12.png"
+                                                        :generatedList[i].exercisename=="Yoga Ball"?"assets/img/8.png"
+                                                        :generatedList[i].exercisename=="Balance"?"assets/img/5.png"
+                                                        :generatedList[i].exercisename=="Tadasana"?"assets/img/9.png"
+                                                        :"assets/img/6.png"
+                                                      ),
+                                                      height:generatedList[i].exercisename=="Bench Press"?55.0:80.0,
+                                                      width:generatedList[i].exercisename=="Bench Press"?55.0:80.0,
+                                                      ),
+                                                    ),
+                                                    
+                                                  ],
+                                                ),
+                                              )
                                             ]
                                           )
                                         ],
@@ -317,7 +433,8 @@ class _ExerciseState extends State<Exercise> with TickerProviderStateMixin {
                               ),
                             ),
                             )
-                          )
+                         )
+                         
                         ], 
                       ),
                     ),
@@ -327,94 +444,75 @@ class _ExerciseState extends State<Exercise> with TickerProviderStateMixin {
         ),
       )
      );
+                                                                                                                  
      
   }
   
   Future<bool> _onAppExit(){
     Navigator.pop(context);
+    
   }
   
    
   }
 
 
-class PopDialog extends StatefulWidget {
-  Timer timer;
-  int popMaxValue;
-  String exercisemode;
-  int setcount;
 
 
-  PopDialog({this.timer,this.popMaxValue,this.exercisemode,this.setcount});
-  @override
-  _PopDialogState createState() => _PopDialogState();
-  
-}
+// class AnimateClock extends StatefulWidget {
+//   Color color;
+//   int duration;
+//   AnimateClock({this.color,this.duration});
+//   @override
+//   _AnimateClockState createState() => _AnimateClockState(this.color,this.duration);
+// }
 
-class _PopDialogState extends State<PopDialog> {
-  final GlobalKey<AnimatedTimerState> animatedStateKey = GlobalKey<AnimatedTimerState>();
-  int _popMaxValue=3;
-  Timer _timer;
-  @override
-  void initState(){
-    playCountdown();
-    startTimer(widget.exercisemode,widget.setcount);
-    super.initState();
-  }
 
-  @override
-  Widget build(BuildContext context) {
-    return WillPopScope(
-        onWillPop: ()async=>false,
-          child: AlertDialog(
-          title: Text('Be Ready to Flex in:',),
-          content: Container(
-            height: 70,
-            child:Text("$_popMaxValue",style: TextStyle(fontSize: 30,color: Colors.redAccent[700],fontWeight: FontWeight.bold),textAlign: TextAlign.center,)
-            
-          ),
-      ),
-    );
-    
-    
-  }
-  //play final countdown on load
-  Future<AudioPlayer> playCountdown() async{
-    print("PLAYING SOUND!!!");
-    AudioCache cache=new AudioCache();
-    return await cache.play("audio/final_countdown.mp3");
-  }
 
-  Future startTimer(String exercisemode,int setcount){
-      const onesec=const Duration(seconds: 1);
-      _timer=new Timer.periodic(onesec,(Timer timer)=>setState(() {
-        if(_popMaxValue<=1){
-          timer.cancel();
-          Navigator.pop(context);
-          Navigator.pop(context);
-          Navigator.push(context, MaterialPageRoute(
-            builder: (context)=>Exercise(exercisemode,setcount,true),
-          ));
+
+// class _AnimateClockState extends State<AnimateClock> {
+//   Color _color;
+//   Timer _timer;
+//   int duration;
+//   _AnimateClockState(this._color,this.duration);
+//   @override
+//   void initState(){
+//   super.initState();
+//   startTimer(_timer,duration);
+ 
+// }
+
+//   @override
+//   Widget build(BuildContext context) {
+//     return AnimatedTimer(
+//       color:_color,
+//       duration: duration,
+//     );
+//   }
+//   Future startTimer(Timer _timer,int duration){
+//       const onesec=const Duration(seconds: 1);
+//       _timer=new Timer.periodic(onesec,(Timer timer)=>setState(() {
+//         if(duration<=1){
+//           timer.cancel();
+//           print("FIRST ANIMATION COMPLETED!!");
          
-          // animatedStateKey.currentState.animationController.reverse(
-          // from: animatedStateKey.currentState.animationController.value == 0.0
-          //       ? 1.0
-          //       : animatedStateKey.currentState.animationController.value);
+//           // animatedStateKey.currentState.animationController.reverse(
+//           // from: animatedStateKey.currentState.animationController.value == 0.0
+//           //       ? 1.0
+//           //       : animatedStateKey.currentState.animationController.value);
 
-        }
-        else{
-          print("$_popMaxValue");
-          if(mounted){
-          setState(() {
-            _popMaxValue=_popMaxValue-1;
-          });
-          }
+//         }
+//         else{
+//           print("$duration");
+//           if(mounted){
+//           setState(() {
+//             duration=duration-1;
+//           });
+//           }
          
-        }
-      })
-      );
+//         }
+//       })
+//       );
     
-    }
-  
-}
-
+//     }
+// }
