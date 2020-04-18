@@ -18,7 +18,6 @@ In this app, one can do daily basic exercise and burn some calories which helps 
 
 <b>SHOTS FROM RANDOM MODE</b>
 <br>
-<b>dashboard1</b>
 <br>
 <table>
   <tr>
@@ -30,8 +29,18 @@ In this app, one can do daily basic exercise and burn some calories which helps 
     <td><img src="/screenshots/dasshboard2.jpeg"></td>
    
   </tr>
- </table>
-
+</table>
+<table>
+  <tr>
+    <td>Random Mode 1</td>
+     <td>Random Mode 2</td>
+  </tr>
+  <tr>
+    <td><img src="/screenshots/random_mode1.jpeg" ></td>
+    <td><img src="/screenshots/random_mode2.jpeg"></td>
+   
+  </tr>
+</table>
 
 
 
