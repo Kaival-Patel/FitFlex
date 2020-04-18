@@ -20,10 +20,19 @@ In this app, one can do daily basic exercise and burn some calories which helps 
 <br>
 <b>dashboard1</b>
 <br>
-<p float="left">
-<img src="/screenshots/dashboard1.jpeg" width="50%" height="50%">
-<img src="/screenshots/dasshboard2.jpeg" width="50%" height="50%">
-</p>
+<table>
+  <tr>
+    <td>Dashboard 1</td>
+     <td>Dashboard 2</td>
+     <td>Present day in purple and selected day in pink</td>
+  </tr>
+  <tr>
+    <td><img src="/screenshots/dashboard1.jpeg" width="50%" height="50%"></td>
+    <td><img src="/screenshots/dasshboard2.jpeg" width="50%" height="50%"></td>
+   
+  </tr>
+ </table>
+
 
 
 
