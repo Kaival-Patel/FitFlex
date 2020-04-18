@@ -8,6 +8,9 @@ In this app, one can do daily basic exercise and burn some calories which helps 
 2.DAILY MODE
 3.SELECTIVE MODE
 
+#### Additional Features
+At Every exercise, different motivational songs will be played, which helps the user to grind more harder!! 
+
 ### RANDOM MODE
 1.In this mode,randomly 5 exercise will be loaded up with their times, approx it will be 7-8 mins including the break.One can spend this time daily if his/her schedule is too tight.
 
@@ -17,8 +20,61 @@ In this app, one can do daily basic exercise and burn some calories which helps 
 
 
 <b>SHOTS FROM RANDOM MODE</b>
+<br>
+<br>
+<table>
+  <tr>
+    <td><b>Dashboard 1</b></td>
+     <td><b>Dashboard 2</b></td>
+  </tr>
+  <tr>
+    <td><img src="/screenshots/dashboard1.jpeg" ></td>
+    <td><img src="/screenshots/dasshboard2.jpeg"></td>
+   
+  </tr>
+</table>
+<br>
+<table>
+  <tr>
+    <td><b>Random Mode 1</b></td>
+     <td><b>Random Mode 2</b></td>
+  </tr>
+  <tr>
+    <td><img src="/screenshots/random_mode1.jpeg" ></td>
+    <td><img src="/screenshots/random_mode2.jpeg"></td>
+   
+  </tr>
+</table>
 
-<img src="/flutter_01.png" width="50%" height="50%">
+<br>
+
+<table>
+  <tr>
+    <td><b>CountDown</b></td>
+     <td><b>Exercise Started Timer</b></td>
+  </tr>
+  <tr>
+    <td><img src="/screenshots/countdown.jpeg" ></td>
+    <td><img src="/screenshots/timerstart.jpeg"></td>
+   
+  </tr>
+</table>
+
+<br>
+
+<table>
+  <tr>
+    <td><b>Break Alert</b></td>
+     <td><b>Choose Set</b></td>
+  </tr>
+  <tr>
+    <td><img src="/screenshots/breakpopup.jpeg" ></td>
+    <td><img src="/screenshots/sets.jpeg"></td>
+   
+  </tr>
+</table>
+
+
 
 ### DAILY MODE
 Currently under progress
