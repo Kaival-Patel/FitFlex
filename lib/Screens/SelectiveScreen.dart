@@ -10,12 +10,20 @@ class SelectiveScreen extends StatefulWidget {
 class _SelectiveScreenState extends State<SelectiveScreen> {
   TextEditingController searchController;
   List<randomexelist> bodylist;
+  List<bool> checklist=new List<bool>();
   var searchresult=List<randomexelist>();
+  Color floatingbtncolor=Color(0xFF806EDF);
+  List<Color> bordercolor=List<Color>();
+  List<randomexelist> usercheckedlist=List<randomexelist>();
   @override
   void initState(){
     super.initState();
     bodylist=randomlist;
     searchresult.addAll(bodylist);
+    for(int i=0;i<bodylist.length;i++){
+      checklist.add(false);
+      bordercolor.add(Colors.white);
+    }
   }
 
   @override
@@ -49,6 +57,37 @@ class _SelectiveScreenState extends State<SelectiveScreen> {
             
           ),
         ),
+        floatingActionButton: Builder(
+            builder: (BuildContext bcontext){
+              return  FloatingActionButton.extended(
+            onPressed:(){
+              if(usercheckedlist.length>4){
+              for(int i=0;i<usercheckedlist.length;i++){
+                print("-->ITEMS TO LIST:${usercheckedlist[i].exercisename}\n");
+              }
+              print("----------------");
+              }
+              else{
+                SnackBar snackBar=SnackBar(
+                  content: Text("Please select atleast five exercises to start!",style: TextStyle(color: Color(0xffdfd6f5),fontWeight: FontWeight.bold,fontFamily: "Oxygen-light" ),)
+                );
+                Scaffold.of(bcontext).showSnackBar(snackBar);
+              }
+              
+            }, 
+            label:Row(
+              children: <Widget>[
+                Text("Let's ",style: TextStyle(fontWeight: FontWeight.normal),),
+                Text("Workout",style: TextStyle(fontWeight: FontWeight.bold),),
+              ],
+            ),
+            backgroundColor: floatingbtncolor ,
+            hoverColor: Colors.red,
+            icon: Icon(Icons.play_arrow),
+            );
+            },
+           
+        ),
         body:Container(
           child:Column(
             children: <Widget>[
@@ -81,23 +120,144 @@ class _SelectiveScreenState extends State<SelectiveScreen> {
 
                 ),
               ),
+              Padding(
+                padding: EdgeInsets.all(12),
+                child: Row(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                  children: <Widget>[
+                    Padding(
+                      padding: EdgeInsets.all(1),
+                      child: Row(
+                        children: <Widget>[
+                          Text("Select any 5 "),
+                          Text("Exercises",style: TextStyle(fontWeight: FontWeight.bold),),
+                        ],
+                      ),
+                    ),
+                    Padding(
+                      padding: EdgeInsets.all(1),
+                      child: Row(
+                        children: <Widget>[
+                          Text("Selected : "),
+                          Text("${usercheckedlist.length}/${searchresult.length}",style: TextStyle(fontWeight: FontWeight.bold),),
+                        ],
+                      ),
+                    ),
+                  ],
+                ),
+              ),
               Expanded(
                 child: ListView.builder(
                   itemCount: searchresult.length,
-                  itemBuilder: (context,i)=>ListTile(
-                    enabled: true,
-                    leading: Icon(Icons.data_usage),
-                    title: Text(searchresult[i].exercisename,),
-                    trailing: Checkbox(
-                      checkColor: Color(0xFF2D1763),
-                      onChanged:(value){
-                        
-                      },
-                      value: true,
+                  itemBuilder: (context,i)=>Container(
+                    decoration: BoxDecoration(
+                      boxShadow: [BoxShadow(
+                        blurRadius: 10.0,
+                        color: Colors.grey[200],
+                        offset: Offset(1.0,15.0),
+                      )]),
+                      child:GestureDetector(
+                        onTap:(){
+                        setState(() {
+                          if(checklist[i]==true){
+                            checklist[i]=false;
+                            usercheckedlist.remove(searchresult[i]);
+                            bordercolor[i]=Colors.white;
+                          }
+                          else{
+                            checklist[i]=true;
+                            usercheckedlist.add(searchresult[i]);
+                            bordercolor[i]=Color(0xFF806EDF);
+                          }
+                          if(usercheckedlist.length>4){
+                            floatingbtncolor=Color(0xFF2D1763);
+                          }
+                          else{
+                            floatingbtncolor=Color(0xFF806EDF);
+                          }
+                        });
+                        } ,
+                        child: Padding(
+                          padding: const EdgeInsets.all(8.0),
+                            child: Container(
+                              height: 100,
+                              decoration: BoxDecoration(
+                                borderRadius: BorderRadius.only(topRight: Radius.circular(30.0),topLeft: Radius.circular(10.0),
+                                    bottomLeft: Radius.circular(10.0),bottomRight: Radius.circular(10.0),
+                                ),
+                                color: Colors.white,
+                                border:Border.all(color:bordercolor[i]),
+                              ),
+                              child: Stack(
+                                children: <Widget>[
+                                  Positioned.fill(
+                                    //rleft: 50,
+                                    child:Align(
+                                      alignment: Alignment.center,
+                                        child: Opacity(
+                                        opacity: 0.3,
+                                        child:  Image(
+                                         image: AssetImage(
+                                                        searchresult[i].exercisename=="Stretches"?"assets/img/4.png"
+                                                        :searchresult[i].exercisename=="Pushups"?"assets/img/1.png"
+                                                        :searchresult[i].exercisename=="Bench Press"?"assets/img/12.png"
+                                                        :searchresult[i].exercisename=="Yoga Ball"?"assets/img/8.png"
+                                                        :searchresult[i].exercisename=="Balance"?"assets/img/5.png"
+                                                        :searchresult[i].exercisename=="Tadasana"?"assets/img/9.png"
+                                                        :"assets/img/6.png"
+                                                      ),
+                                          height: 100,
+                                          width: 100,            
+                                         
+                                        ),
+                                      ),
+                                    ),
+                                  ),
+                                  Padding(
+                                  padding: const EdgeInsets.all(8.0),
+                                  child: Row(
+                                    crossAxisAlignment: CrossAxisAlignment.center,
+                                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                                    children: <Widget>[
+                                      
+                                      Text(searchresult[i].exercisename,style: TextStyle(color:Colors.black,fontWeight: FontWeight.bold),),
+                                      Checkbox(
+                                        value: checklist[i],
+                                        onChanged: (checked){
+                                          setState(() {
+                                            checklist[i]=checked;
+                                            if(checked){
+                                              usercheckedlist.add(searchresult[i]);
+                                              bordercolor[i]=Color(0xFF806EDF);
+                                            }
+                                            else{
+                                              usercheckedlist.remove(searchresult[i]);
+                                              bordercolor[i]=Colors.white;
+                                            }
+                                            if(usercheckedlist.length>4){
+                                              floatingbtncolor=Color(0xFF2D1763);
+                                            }
+                                            else{
+                                              floatingbtncolor=Color(0xFF806EDF);
+                                            }
+                                          });
+                                          print("CHECKBOX STATUS:${checked}");
+                                        },
+                                        activeColor:Color(0xFF2D1763) ,
+                                        checkColor: Colors.white,
+                                      )
+                                    ],
+                                  ),
+                                ),
+                                ],
+                              ),
+                            ),
+                        ),
+                      ) ,
                     ),
                   ),
-                ),
-              )
+                ), 
             ],
           )
         ), 
