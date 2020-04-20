@@ -100,5 +100,20 @@ They can also search through them , provided live search feature.
 </table>
 <br>
 
+<br>
+<br>
+<table>
+  <tr>
+    <td><b>Exercise Started 1</b></td>
+     <td><b>Exercise Started 2</b></td>
+  </tr>
+  <tr>
+    <td><img src="/screenshots/selective4.jpeg" ></td>
+    <td><img src="/screenshots/selective3.jpeg"></td>
+   
+  </tr>
+</table>
+<br>
+
 
 
