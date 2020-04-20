@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:gradient_app_bar/gradient_app_bar.dart';
+import 'package:myworkout_app/Screens/SelectiveExercise.dart';
 import 'package:myworkout_app/datamodel/randomexlist.dart';
 class SelectiveScreen extends StatefulWidget {
   @override
@@ -66,6 +67,34 @@ class _SelectiveScreenState extends State<SelectiveScreen> {
                 print("-->ITEMS TO LIST:${usercheckedlist[i].exercisename}\n");
               }
               print("----------------");
+              showDialog(
+                context: context,
+                child: AlertDialog(
+                  title: Text("Exercise will start!"),
+                  content: Text("Are you sure to proceed with those exercise?"),
+                  actions: <Widget>[
+                    ButtonBar(
+                      children: <Widget>[
+                        FlatButton(
+                          child: Text("Cancel"),
+                         
+                          onPressed:(){Navigator.pop(context);},
+                        ),
+                        FlatButton(
+                          child: Text("Start"),
+                           color: floatingbtncolor,
+                          onPressed:(){
+                            Navigator.pop(context);
+                            Navigator.push(context, MaterialPageRoute(
+                            builder: (context)=>SelectiveExercise(bodylist: usercheckedlist,)
+                          ));},
+                        )
+                      ],
+                    )
+                  ],
+                )
+              );
+              
               }
               else{
                 SnackBar snackBar=SnackBar(
@@ -196,7 +225,7 @@ class _SelectiveScreenState extends State<SelectiveScreen> {
                                     child:Align(
                                       alignment: Alignment.center,
                                         child: Opacity(
-                                        opacity: 0.3,
+                                        opacity: 0.5,
                                         child:  Image(
                                          image: AssetImage(
                                                         searchresult[i].exercisename=="Stretches"?"assets/img/4.png"

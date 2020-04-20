@@ -255,7 +255,7 @@ class _RandomScreenState extends State<RandomScreen> with TickerProviderStateMix
                                                           :i==2?Color(0xff08425D)
                                                           :i==3?Color(0xff9F3624)
                                                           :Color(0xff4F2991)
-                                                           ,duration:generatedList[i].time,statuscode: 1,setcount: setcount)
+                                                           ,duration:generatedList[i].time,animationcount: generatedList.length,statuscode: 1,setcount: setcount)
                                                         :i==2?AnimatedTimer(
                                                           color:i==0?
                                                           Color(0xff135438)
@@ -263,21 +263,21 @@ class _RandomScreenState extends State<RandomScreen> with TickerProviderStateMix
                                                           :i==2?Color(0xff08425D)
                                                           :i==3?Color(0xff9F3624)
                                                           :Color(0xff4F2991)
-                                                           ,duration:generatedList[i].time,statuscode: 2,setcount: setcount)
+                                                           ,duration:generatedList[i].time,animationcount: generatedList.length,statuscode: 2,setcount: setcount)
                                                         :i==3?AnimatedTimer(color:i==0?
                                                         Color(0xff135438)
                                                         :i==1?Color(0xff78400A) 
                                                         :i==2?Color(0xff08425D)
                                                         :i==3?Color(0xff9F3624)
                                                         :Color(0xff4F2991)
-                                                         ,duration:generatedList[i].time,statuscode: 3,setcount: setcount)
+                                                         ,duration:generatedList[i].time,animationcount: generatedList.length,statuscode: 3,setcount: setcount)
                                                         :AnimatedTimer(color:i==0?
                                                         Color(0xff135438)
                                                         :i==1?Color(0xff78400A) 
                                                         :i==2?Color(0xff08425D)
                                                         :i==3?Color(0xff9F3624)
                                                         :Color(0xff4F2991)
-                                                         ,duration:generatedList[i].time,statuscode: 4,setcount: setcount) 
+                                                         ,duration:generatedList[i].time,animationcount: generatedList.length,statuscode: 4,setcount: setcount) 
                                                          ,
                                                  delay: i==0?Duration(seconds: 0):
                                                         i==1?Duration(seconds: generatedList[i].time+BREAK_TIME):
@@ -291,25 +291,25 @@ class _RandomScreenState extends State<RandomScreen> with TickerProviderStateMix
                                                         :i==1?Color(0xff78400A) 
                                                         :i==2?Color(0xff08425D)
                                                         :i==3?Color(0xff9F3624)
-                                                        :Color(0xff4F2991) ,duration:generatedList[i].time,statuscode: 5,setcount: setcount,)
+                                                        :Color(0xff4F2991) ,duration:generatedList[i].time,animationcount: generatedList.length,statuscode: 5,setcount: setcount,)
                                                         :i==1?new AnimatedTimer(color:i==0?
                                                         Color(0xff135438)
                                                         :i==1?Color(0xff78400A) 
                                                         :i==2?Color(0xff08425D)
                                                         :i==3?Color(0xff9F3624)
-                                                        :Color(0xff4F2991) ,duration:generatedList[i].time,statuscode: 5,setcount: setcount)
+                                                        :Color(0xff4F2991) ,duration:generatedList[i].time,animationcount: generatedList.length,statuscode: 5,setcount: setcount)
                                                         :i==2?AnimatedTimer(color:i==0?
                                                         Color(0xff135438)
                                                         :i==1?Color(0xff78400A) 
                                                         :i==2?Color(0xff08425D)
                                                         :i==3?Color(0xff9F3624)
-                                                        :Color(0xff4F2991) ,duration:generatedList[i].time,statuscode: 5,setcount: setcount)
+                                                        :Color(0xff4F2991) ,duration:generatedList[i].time,animationcount: generatedList.length,statuscode: 5,setcount: setcount)
                                                         :AnimatedTimer(color:i==0?
                                                         Color(0xff135438)
                                                         :i==1?Color(0xff78400A) 
                                                         :i==2?Color(0xff08425D)
                                                         :i==3?Color(0xff9F3624)
-                                                        :Color(0xff4F2991) ,duration:generatedList[i].time,statuscode: 5,setcount: setcount),
+                                                        :Color(0xff4F2991) ,duration:generatedList[i].time,animationcount: generatedList.length,statuscode: 5,setcount: setcount),
                                                  delay: i==0?Duration(seconds: 0):
                                                         i==1?Duration(seconds: 0):
                                                         i==2?Duration(seconds: 0):
@@ -318,75 +318,7 @@ class _RandomScreenState extends State<RandomScreen> with TickerProviderStateMix
 
                                                      
                                              ),
-                                      
-                                                // Padding(
-                                                //   padding: const EdgeInsets.fromLTRB(15, 15, 15, 15),
-                                                //   child:_countdownTimer
-                                                //   // child: Column(
-                                                //   //   children: <Widget>[
-                                                //   //     Align(
-                                                //   //         alignment: FractionalOffset.center,
-                                                //   //         child: AspectRatio(
-                                                //   //           aspectRatio: 1.0,
-                                                //   //           child: Stack(
-                                                //   //             children: <Widget>[
-                                                //   //               Positioned.fill(
-                                                //   //               child: AnimatedBuilder(
-                                                //   //                 animation: exercisecontroller,
-                                                //   //                 builder: (BuildContext context,Widget child)=>
-                                                //   //                 CustomPaint(
-                                                //   //                   painter: CustomTimerPainter(
-                                                //   //                     animation: exercisecontroller,
-                                                //   //                     backgroundColor: Colors.white,
-                                                //   //                     color:Color(0xff135438),
-                                                //   //                   ),
-                                                //   //                 )
-                                                //   //                 ,
-                                                //   //               )
-                                                //   //               ),
-                                                //   //               Align(
-                                                //   //                 alignment: FractionalOffset.center,
-                                                //   //                 child: Column(
-                                                //   //                   mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                                                //   //                   crossAxisAlignment: CrossAxisAlignment.center,
-                                                //   //                   children: <Widget>[
-                                                //   //                     AnimatedBuilder(
-                                                //   //                       animation: exercisecontroller, 
-                                                //   //                       builder: (BuildContext context,Widget child)=>
-                                                //   //                       Text(timerString,style: TextStyle(fontSize: 20,color:Color(0xff135438)),)
-                                                //   //                       )
-                                                //   //                   ],
-                                                //   //                 ),
-                                                //   //               )
-                                                //   //             ],
-                                                //   //           ),
-                                                //   //         ),
-                                                //   //       ),
-              
-                                                //   //     AnimatedBuilder(
-                                                //   //       animation: exercisecontroller,
-                                                //   //       builder: (context, child) {
-                                                //   //         return FloatingActionButton.extended(
-                                                //   //             onPressed: () {
-                                                //   //               if (exercisecontroller.isAnimating)
-                                                //   //                 exercisecontroller.stop();
-                                                //   //               else {
-                                                //   //                 exercisecontroller.reverse(
-                                                //   //                     from: exercisecontroller.value == 0.0
-                                                //   //                         ? 1.0
-                                                //   //                         : exercisecontroller.value);
-                                                //   //               }
-                                                //   //             },
-                                                //   //             icon: Icon(exercisecontroller.isAnimating
-                                                //   //                 ? Icons.pause
-                                                //   //                 : Icons.play_arrow),
-                                                //   //             label: Text(
-                                                //   //                 exercisecontroller.isAnimating ? "Pause" : "Play"));
-                                                //   //       }),
-                                                //   //   ],
-                                                //   // ),
-                                                // ),
-                                                
+
                                                 ],
                                               ),
                                               Padding(

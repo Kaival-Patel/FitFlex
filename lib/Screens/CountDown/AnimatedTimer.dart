@@ -10,20 +10,21 @@ import 'CustomTimerPainter.dart';
       int statuscode;
       int setcount;
       AnimationController animationController;
-      AnimatedTimer({this.duration,this.color,this.statuscode,this.setcount});
+      int animationcount;
+      AnimatedTimer({this.duration,this.animationcount,this.color,this.statuscode,this.setcount});
       @override
       AnimatedTimerState createState() => AnimatedTimerState(this.duration,this.color,this.statuscode,this.setcount);
     }
 
     class AnimatedTimerState extends State<AnimatedTimer> with TickerProviderStateMixin {
-      int duration;
+      int duration,animationcount;
       Color color;
       int statuscode,setcount;
       bool isExerciseCompleted=false;
       AudioPlayer audioPlayer;
       final int BREAK_TIME=40;
       AnimatedTimerState(this.duration,this.color,this.statuscode,this.setcount);
-      AnimationController animationController,animationController2,animationController3,animationController4,animationController5;
+      AnimationController animationController,animationController2,animationController3,animationController4,animationController5,animationController6,animationController7;
       String get timerString0 {
         Duration duration = animationController.duration * animationController.value;
         return '${duration.inMinutes}:${(duration.inSeconds % 60).toString().padLeft(2, '0')}';
@@ -44,11 +45,21 @@ import 'CustomTimerPainter.dart';
         Duration duration = animationController5.duration * animationController5.value;
         return '${duration.inMinutes}:${(duration.inSeconds % 60).toString().padLeft(2, '0')}';
       }
+       String get timerString5 {
+        Duration duration = animationController6.duration * animationController6.value;
+        return '${duration.inMinutes}:${(duration.inSeconds % 60).toString().padLeft(2, '0')}';
+      }
+       String get timerString6 {
+        Duration duration = animationController7.duration * animationController7.value;
+        return '${duration.inMinutes}:${(duration.inSeconds % 60).toString().padLeft(2, '0')}';
+      }
 
       @override
       void initState(){
         super.initState();
         Wakelock.enable();
+        animationcount=widget.animationcount;
+        print("NO OF ANIMATIONS TO SHOW:${animationcount}");
         print("IN THE INIT STATE with sets:${setcount}");
         audioPlayer=new AudioPlayer();
         animationController=AnimationController(
@@ -76,6 +87,18 @@ import 'CustomTimerPainter.dart';
           )
         );
         animationController5=AnimationController(
+          vsync: this,
+          duration: Duration(
+            seconds: duration
+          )
+        );
+        animationController6=AnimationController(
+          vsync: this,
+          duration: Duration(
+            seconds: duration
+          )
+        );
+        animationController7=AnimationController(
           vsync: this,
           duration: Duration(
             seconds: duration
@@ -146,11 +169,60 @@ import 'CustomTimerPainter.dart';
                   from: animationController5.value == 0.0
                   ? 1.0
                   : animationController5.value).whenComplete((){
-                  finishDialog();
-                  setState(() {
+                    if(animationcount==6){
                     audioPlayer.stop();
-                    isExerciseCompleted=true;
+                    breakDialog();
+                  //break
+                    Future.delayed(Duration(seconds: BREAK_TIME),(){
+                    //remove break dialog 
+                    Navigator.pop(context);
+                    playSong("joined audio.mp3");
+                    animationController6.reverse(
+                    from: animationController6.value == 0.0
+                    ? 1.0
+                    : animationController6.value).whenComplete((){
+                      if(animationcount==6){
+                    audioPlayer.stop();
+                    breakDialog();
+                  //break
+                    Future.delayed(Duration(seconds: BREAK_TIME),(){
+                    //remove break dialog 
+                    Navigator.pop(context);
+                    playSong("joined audio.mp3");
+                    animationController7.reverse(
+                    from: animationController7.value == 0.0
+                    ? 1.0
+                    : animationController7.value).whenComplete((){
+                      finishDialog();
+                      setState(() {
+                      audioPlayer.stop();
+                      isExerciseCompleted=true;
+                      });
+
                     });
+                    
+                    });
+                    }
+                    else{
+                      finishDialog();
+                      setState(() {
+                      audioPlayer.stop();
+                      isExerciseCompleted=true;
+                      });
+                    }
+
+                    });
+                    
+                    });
+                    }
+                    else{
+                      finishDialog();
+                      setState(() {
+                      audioPlayer.stop();
+                      isExerciseCompleted=true;
+                      });
+                    }
+                  
                   });
                 });
               });

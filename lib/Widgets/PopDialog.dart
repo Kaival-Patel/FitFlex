@@ -66,7 +66,9 @@ class _PopDialogState extends State<PopDialog> {
           Navigator.pop(context);
           Wakelock.enable();
           Navigator.push(context, MaterialPageRoute(
-            builder: (context)=>RandomScreen(exercisemode: exercisemode,exestarted: true,setcount: setcount,generatedList: randomexelist,),
+            builder:(context)=>RandomScreen(exercisemode: exercisemode,exestarted: true,setcount: setcount,generatedList: randomexelist,)
+      
+            
           
           ));
          
