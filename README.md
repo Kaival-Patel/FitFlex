@@ -34,6 +34,7 @@ At Every exercise, different motivational songs will be played, which helps the 
   </tr>
 </table>
 <br>
+
 <table>
   <tr>
     <td><b>Random Mode 1</b></td>
@@ -80,7 +81,24 @@ At Every exercise, different motivational songs will be played, which helps the 
 Currently under progress
 
 ### SELECTIVE MODE
-Currently under progress.
+In this mode user can select their own exercise to do, atleast 5 exercises needed to be chosen from the list .It can be more than 5 too.
+They can also search through them , provided live search feature.
+
+<b>SHOTS FROM SELECTIVE MODE</b>
+<br>
+<br>
+<table>
+  <tr>
+    <td><b>Selective Screen</b></td>
+     <td><b>Search Functionality</b></td>
+  </tr>
+  <tr>
+    <td><img src="/screenshots/selective.jpeg" ></td>
+    <td><img src="/screenshots/selective1.jpeg"></td>
+   
+  </tr>
+</table>
+<br>
 
 
 
